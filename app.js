@@ -30,17 +30,28 @@ const {contributeCampaign,campaignContributors}=require("./controllers/contribut
 const {send_mail_registration}=require("./controllers/mail");
 const {payment}=require("./controllers/payment");
 
-passport.use(new GoogleStrategy({
+  passport.use(new GoogleStrategy({
     clientID: process.env.CLIENT_ID,
     clientSecret: process.env.CLIENT_SECRET,
     callbackURL: "http://localhost:3000/auth/google/callback",
   },
-  function(accessToken, refreshToken, profile,cb){
-
-    User.findOrCreate({name:profile.displayName,email:profile.emails[0].value,profile_photo_url:profile.photos[0].value},function(err,user){
+  function(accessToken, refreshToken, profile, cb) {
+    const domain = "akgec.ac.in";
     
-      return cb(err,user);
-    });
+    
+    if (profile.emails && profile.emails[0].value.endsWith(domain)) {
+      User.findOrCreate({
+        name: profile.displayName,
+        email: profile.emails[0].value,
+        profile_photo_url: profile.photos[0].value
+      }, function(err, user) {
+        return cb(err, user);
+      });
+    } else {
+      
+      return cb("Only AKGEC email addresses are allowed", null);
+
+    }
   }
 ));
 
