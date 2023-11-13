@@ -13,7 +13,7 @@ const {setUser}=require("./middleware/auth");
 const {checkJwtCookie}=require("./middleware/middleware");
 
 const {connectMongoDb}=require("./connection");
-const PORT=3000;
+const PORT=process.env.PORT || 3000;
 
 app.use(bodyParser.json());
 app.use(express.urlencoded({extended: false}));
@@ -118,7 +118,7 @@ app.get("/register",(req,res)=>{
   }
 }); 
 
-  connectMongoDb("mongodb://127.0.0.1:27017/Task4")
+  connectMongoDb(process.env.MONGO_URL)
   .then(()=>console.log("MongoDB connected!"));
   
   app.listen(PORT,()=>console.log("Server Started!"));  
