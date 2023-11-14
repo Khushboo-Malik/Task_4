@@ -118,7 +118,7 @@ app.get("/register",(req,res)=>{
   }
 }); 
 
-  connectMongoDb(process.env.MONGO_URL)
+  connectMongoDb(`mongodb+srv://mailkhushboomalik:${process.env.MONGO_PASSWORD}@cluster1.kcrrp8w.mongodb.net/?retryWrites=true&w=majority`)
   .then(()=>console.log("MongoDB connected!"));
   
   app.listen(PORT,()=>console.log("Server Started!"));  
