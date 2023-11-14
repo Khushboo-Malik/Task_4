@@ -33,7 +33,7 @@ const {payment}=require("./controllers/payment");
   passport.use(new GoogleStrategy({
     clientID: process.env.CLIENT_ID,
     clientSecret: process.env.CLIENT_SECRET,
-    callbackURL: "http://localhost:3000/auth/google/callback",
+    callbackURL: `${process.env.URL}/auth/google/callback`,
   },
   function(accessToken, refreshToken, profile, cb) {
     const domain = "akgec.ac.in";
