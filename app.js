@@ -118,7 +118,7 @@ app.get("/register",(req,res)=>{
   }
 }); 
 
-  connectMongoDb(MONGO_URL)
+  connectMongoDb(process.env.MONGO_URL)
   .then(()=>console.log("MongoDB connected!"));
   
   app.listen(PORT,()=>console.log("Server Started!"));  
