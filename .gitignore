@@ -1,9 +1,2 @@
 node_modules/
 .env
-/controllers/uploads/
-app2.js
-connection2.js
-controllers2/
-middleware2/
-models2/
-views2/
